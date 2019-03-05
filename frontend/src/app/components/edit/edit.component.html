@@ -1,0 +1,38 @@
+<div>
+	<br>
+	<mat-card>
+		<section class="mat-typography">
+			<h3>Update Item</h3>
+		</section>
+		<mat-divider></mat-divider>
+		<br>
+		<form [formGroup] = "updateForm" class="edit-form">
+			<mat-form-field class = "field-full-width">
+				<input matInput placeholder="ID" formControlName="id" #id>
+			</mat-form-field> <br>
+			<mat-form-field class = "field-full-width">
+				<input matInput placeholder="Item Name" formControlName="name" #name>
+			</mat-form-field> <br>
+			<mat-form-field class = "field-full-width">
+				<input matInput placeholder="Owner" formControlName="owner" #owner>
+			</mat-form-field> <br>
+			<mat-form-field class = "field-full-width">
+				<textarea matInput placeholder="Description" formControlName="description" #description></textarea>
+			</mat-form-field> <br>
+			<mat-form-field class = "field-full-width">
+				<input type="number" matInput placeholder="Price" formControlName="price" #price>
+			</mat-form-field> <br>
+			<mat-form-field class = "field-full-width">
+				<mat-select placeholder="Status" formControlName="status" #status>
+					<mat-option value="Available">Available</mat-option>
+					<mat-option value="Sold Out">Sold Out</mat-option>
+					<mat-option value="Not Available">Not Available</mat-option>
+				</mat-select>
+			</mat-form-field>
+			<mat-divider></mat-divider>
+			<br><br>
+			<button mat-raised-button color="accent" routerLink="/list">Back</button>&nbsp;
+			<button type="submit" (click)="updateItem(id.value, name.value, owner.value, description.value, price.value, status.value)" [disabled]="updateForm.pristine || updateForm.invalid" mat-raised-button color="primary">Save</button>
+		</form>
+	</mat-card>
+</div>

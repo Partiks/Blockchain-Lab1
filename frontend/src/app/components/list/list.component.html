@@ -1,0 +1,42 @@
+<div>
+	<br>
+	<mat-card>
+		<button mat-raised-button color="primary" routerLink="/create">Sell New Item</button>
+		<br><br>
+		<mat-divider></mat-divider>
+		<br>
+		<table mat-table [dataSource]="items">
+			<ng-container matColumnDef="Name">
+				<th mat-header-cell *matHeaderCellDef>Name</th>
+				<td mat-cell *matCellDef="let element"> {{element.name}} </td>
+			</ng-container>
+
+			<ng-container matColumnDef="Description">
+				<th mat-header-cell *matHeaderCellDef>Description</th>
+				<td mat-cell *matCellDef="let element"> {{element.description}} </td>
+			</ng-container>
+
+			<ng-container matColumnDef="Price">
+				<th mat-header-cell *matHeaderCellDef>Price</th>
+				<td mat-cell *matCellDef="let element"> {{element.price}} </td>
+			</ng-container>
+
+			<ng-container matColumnDef="Status">
+				<th mat-header-cell *matHeaderCellDef>Status</th>
+				<td mat-cell *matCellDef="let element"> {{element.status}} </td>
+			</ng-container>
+
+			<ng-container matColumnDef="Actions">
+				<th mat-header-cell *matHeaderCellDef class="mat-column-right">Actions</th>
+				<td mat-cell *matCellDef="let element"  class="mat-column-right">
+					<button mat-button color="primary" (click)="editItem(element._id)">Edit</button>
+					<button mat-button color="warn" (click)="deleteItem(element._id)">Delete</button>
+				</td>
+			</ng-container>
+
+			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+		</table>
+	</mat-card>
+</div>
