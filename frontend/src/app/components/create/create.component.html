@@ -1,3 +1,14 @@
+<mat-toolbar color="primary">
+<mat-toolbar-row>
+<span>Angular Marketplace</span>
+    <span class="example-fill-remaining-space"></span>
+    <span class="align-center"></span>
+    <span class="example-spacer"></span>
+    <button mat-button>About</button>
+    <button mat-button>Contact</button>
+ </mat-toolbar-row>
+</mat-toolbar>
+
 <div>
 	<br>
 	<mat-card>
@@ -13,26 +24,26 @@
 			<mat-form-field class = "field-full-width">
 				<input matInput placeholder="Item Name" formControlName="name" #name>
 			</mat-form-field> <br>
-			<mat-form-field class = "field-full-width">
+			<!--><mat-form-field class = "field-full-width">
 				<input matInput placeholder="Owner" formControlName="owner" #owner>
-			</mat-form-field> <br>
+			</mat-form-field> <br> <!-->
 			<mat-form-field class = "field-full-width">
 				<textarea matInput placeholder="Description" formControlName="description" #description></textarea>
 			</mat-form-field> <br>
 			<mat-form-field class = "field-full-width">
 				<input type="number" matInput placeholder="Price" formControlName="price" #price>
 			</mat-form-field> <br>
-			<mat-form-field class = "field-full-width">
+			<!--><mat-form-field class = "field-full-width">
 				<mat-select placeholder="Dummy" formControlName="dummy" #dummy>
 					<mat-option value="Low">Low</mat-option>
 					<mat-option value="Medium">Medium</mat-option>
 					<mat-option value="High">High</mat-option>
 				</mat-select>
-			</mat-form-field>
+			</mat-form-field> <!-->
 			<mat-divider></mat-divider>
 			<br><br>
-			<button mat-raised-button color="accent" routerLink="/list">Back</button>&nbsp;
-			<button type="submit" (click)="addItem(id.value, name.value, owner.value, description.value, price.value)" [disabled]="createForm.pristine || createForm.invalid" mat-raised-button color="primary">Save</button>
+			<button type="button" mat-raised-button color="accent" (click)="backToList()">Back</button>&nbsp;
+			<button type="submit" (click)="addItem(id.value, name.value, description.value, price.value)" [disabled]="createForm.pristine || createForm.invalid" mat-raised-button color="primary">Save</button>
 		</form>
 	</mat-card>
 </div>

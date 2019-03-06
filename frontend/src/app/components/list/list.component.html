@@ -1,7 +1,20 @@
+<mat-toolbar color="primary">
+<mat-toolbar-row>
+<span>Angular Marketplace</span>
+    <span class="example-fill-remaining-space"></span>
+    <span class="align-center"></span>
+    <span class="example-spacer"></span>
+    <div style="font-size: 20px">
+            <!--> <mat-icon style="font-size: 30px" class="center">person</mat-icon>  <!-->
+            <button mat-button> USERNAME </button>
+    </div>
+ </mat-toolbar-row>
+</mat-toolbar>
 <div>
 	<br>
 	<mat-card>
-		<button mat-raised-button color="primary" routerLink="/create">Sell New Item</button>
+		<!-- > <button mat-raised-button color="primary" routerLink="/create/:uname">Sell New Item</button> <!-->
+		<button mat-raised-button color="primary" (click)="sellItem()">Sell New Item</button>
 		<br><br>
 		<mat-divider></mat-divider>
 		<br>

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {ItemService} from '../../item.service';
+import { User } from '../../user.model';
 
 @Component({
   selector: 'app-create',
@@ -11,8 +12,10 @@ import {ItemService} from '../../item.service';
 export class CreateComponent implements OnInit {
 
 	createForm: FormGroup;
+  uname: String;
+  user: any = {};
 
-  constructor(private itemService: ItemService, private fb: FormBuilder, private router: Router) {
+  constructor(private itemService: ItemService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
   	this.createForm = this.fb.group({
   		id: '',
   		name: ['', Validators.required],
@@ -22,13 +25,24 @@ export class CreateComponent implements OnInit {
   	});
   }
 
-  addItem(id, name, owner, description, price){
-  	this.itemService.addItem(id, name, owner, description, price). subscribe( () => {
-  		this.router.navigate(['/list']);
+  backToList(){
+    console.log("Going back to list from create");
+    console.log(this.uname);
+    this.router.navigate([`/list/${this.uname}`]);
+  }
+
+  addItem(id, name, description, price){
+  	this.itemService.addItem(id, name, this.uname, description, price). subscribe( () => {
+  		this.router.navigate([`/list/${this.uname}`]);
   	});
   }
 
   ngOnInit() {
+    this.route.params.subscribe( params => {
+      this.uname = params.uname;
+      console.log("YASS LOLPODO");
+      console.log(this.uname);
+    });
   }
 
 }

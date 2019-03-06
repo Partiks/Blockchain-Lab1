@@ -14,11 +14,18 @@ import {HttpClientModule} from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {ItemService} from './item.service';
+import { LoginComponent } from './components/login/login.component';
+
 
 const routes: Routes = [
   { path: 'create', component: CreateComponent },
+  { path: 'create/:uname', component: CreateComponent },
   { path: 'edit/:id', component: EditComponent },
+  { path: 'edit/:uname/:id', component: EditComponent },
   { path: 'list', component: ListComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'list/:uname/items', component: ListComponent },
+  { path: 'list/:uname', component: ListComponent },
   { path: '', redirectTo: '/list', pathMatch: 'full'}
 ];
 
@@ -27,7 +34,8 @@ const routes: Routes = [
     AppComponent,
     ListComponent,
     CreateComponent,
-    EditComponent
+    EditComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

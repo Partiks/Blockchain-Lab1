@@ -3,7 +3,8 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 
-import Item from './models/item'
+import Item from './models/item';
+import User from './models/user';
 
 const app = express();
 //app.get('/', (req, res) => res.send("Hello from server.js !"));
@@ -80,6 +81,85 @@ router.route('/items/delete/:id').get( (req, res) => {
 			res.json('Deletion successful');
 	})
 })
+
+
+router.route('/users').get((req, res) => {
+	User.find((err, users) => {
+		if (err)
+			console.log(err);
+		else
+			res.json(users);
+	});
+});
+
+router.route('/users/:username').get((req, res) => {
+	console.log("NODEJS SERVERSIDE FINDING USERNAME");
+	User.findOne({username: req.params.username}, (err, user) => {
+		if (err)
+			console.log(err);
+		else
+			res.json(user);
+	});
+})
+
+router.route('/users/:username/items').get( (req,res) => {
+	console.log("USER ITEMS REACHED");
+	User.findOne({username: req.params.username}, (err, user) => {
+		if (err)
+			console.log(err);
+		else{
+			var u_str = JSON.stringify(user);
+			var objectValue = JSON.parse(u_str);
+			var u_items = objectValue["u_items"];
+			console.log("USER ITEMS SERVER.JS");
+			console.log(u_items);
+			res.json(u_items);
+		}
+	});
+})
+
+router.route('/users/add').post( (req, res) => {
+	let user = new User(req.body);
+	user.save()
+		.then(user => {
+			res.status(200).json({'user' : 'Added sucessfully to marketplace'});
+		})
+		.catch(err => {
+			res.status(400).send('Failed to add user to marketplace database')
+		});
+})
+
+router.route('/users/update/:username').post( (req, res) => {
+	User.findOne({username: req.params.username}, (err, user) =>{
+		if(!user)
+			return next(new Error('Could not load user'));
+		else
+		{
+			user.username = req.body.username;
+			user.password = req.body.password;
+			user.balance = req.body.balance;
+			user.u_items = req.body.u_items;
+
+			user.save().then(user => {
+				res.json('Updated the user information');
+			}).catch(err => {
+				res.status(400).send(err);
+			});
+		}
+	})
+})
+
+router.route('/users/delete/:username').get( (req, res) => {
+	User.findByOneAndRemove({username: req.params.username}, (err, user) => {
+		if(err)
+			res.json(err);
+		else
+			res.json('Deletion successful');
+	})
+})
+
+
+
 
 app.use('/', router);
 

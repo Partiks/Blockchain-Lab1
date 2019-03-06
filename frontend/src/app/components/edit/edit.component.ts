@@ -15,6 +15,7 @@ import { Item } from '../../item.model';
 export class EditComponent implements OnInit {
 	id: String;
 	item: any = {};
+  uname: String;
 	updateForm: FormGroup
 
   constructor(private itemService: ItemService, private router: Router, private route: ActivatedRoute, private snackBar: MatSnackBar, private fb: FormBuilder) { 
@@ -35,6 +36,7 @@ export class EditComponent implements OnInit {
   ngOnInit() {
   	this.route.params.subscribe( params => {
   		this.id = params.id;
+      this.uname = params.uname;
   		this.itemService.getItemById(this.id).subscribe(res => {
   			this.item = res;
   			this.updateForm.get('id').setValue(this.item.id);
@@ -46,6 +48,12 @@ export class EditComponent implements OnInit {
   		});
   	});
 
+  }
+
+  backToList(){
+    console.log("Going back to list from create");
+    console.log(this.uname);
+    this.router.navigate([`/list/${this.uname}`]);
   }
 
   updateItem(id, name, owner, description, price, status){
