@@ -17,12 +17,12 @@
 	width: 35%;
 }
 
-.marg-left{
-  margin-left: 15px;
-}
-
 .field-full-width{
 	width: 90%;
+}
+
+.marg-left{
+  margin-left: 15px;
 }
 
 .example-header-image {

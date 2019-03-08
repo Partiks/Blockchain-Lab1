@@ -4,17 +4,14 @@
     <span class="example-fill-remaining-space"></span>
     <span class="align-center"></span>
     <span class="example-spacer"></span>
-    <button mat-button (click)="registerUser()"> Register </button>
  </mat-toolbar-row>
 </mat-toolbar>
-
 <div class="main-div">
-
 <mat-card class="card-field-full-width" >
   <mat-card-header>
-    <mat-card-title>Login</mat-card-title>
+    <mat-card-title>Register</mat-card-title>
   </mat-card-header>
-  <form [formGroup] = "loginForm" class="edit-form">
+  <form [formGroup] = "registerForm" class="edit-form">
     <mat-card-content>
         <mat-form-field class = "field-full-width marg-left">
           <input matInput placeholder="Username" formControlName="username" #username>
@@ -22,10 +19,14 @@
         <mat-form-field class = "field-full-width marg-left">
           <input type="password" matInput placeholder="Password" formControlName="password" #password>
         </mat-form-field> <br>
+        <mat-form-field class = "field-full-width marg-left">
+          <input matInput placeholder="Initial Balance of Account" formControlName="balance" #balance>
+        </mat-form-field> <br>
     </mat-card-content>
     <mat-card-actions>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <button type="submit" (click)="login(username.value, password.value)" mat-raised-button color="primary">LOGIN</button>
+    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    	<button mat-raised-button color="accent" (click)="backToLogin()">BACK</button> &nbsp;
+      	<button type="submit" (click)="registerUser(username.value, password.value, balance.value)" mat-raised-button color="primary">SUBMIT</button>
     </mat-card-actions>
   </form>
 </mat-card>

@@ -17,7 +17,6 @@ export class CreateComponent implements OnInit {
 
   constructor(private itemService: ItemService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
   	this.createForm = this.fb.group({
-  		id: '',
   		name: ['', Validators.required],
   		owner: '',
   		description: '',
@@ -25,14 +24,16 @@ export class CreateComponent implements OnInit {
   	});
   }
 
+  
+
   backToList(){
     console.log("Going back to list from create");
     console.log(this.uname);
     this.router.navigate([`/list/${this.uname}`]);
   }
 
-  addItem(id, name, description, price){
-  	this.itemService.addItem(id, name, this.uname, description, price). subscribe( () => {
+  addItem(name, description, price){
+  	this.itemService.addItem(name, this.uname, description, price). subscribe( () => {
   		this.router.navigate([`/list/${this.uname}`]);
   	});
   }

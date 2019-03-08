@@ -41,9 +41,14 @@ export class LoginComponent implements OnInit {
   			console.log(" >>>> LOGIN FAILED >>>>");
   			console.log(this.user);
   		}
-
   	})
-
   }
+
+  registerUser(){
+    this.router.navigate([`/register`]);
+  }
+
+
+
 
 }

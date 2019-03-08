@@ -16,9 +16,6 @@
 		<br>
 		<form [formGroup] = "updateForm" class="edit-form">
 			<mat-form-field class = "field-full-width">
-				<input matInput placeholder="ID" formControlName="id" #id>
-			</mat-form-field> <br>
-			<mat-form-field class = "field-full-width">
 				<input matInput placeholder="Item Name" formControlName="name" #name>
 			</mat-form-field> <br>
 			<mat-form-field class = "field-full-width">
@@ -40,7 +37,7 @@
 			<mat-divider></mat-divider>
 			<br><br>
 			<button mat-raised-button color="accent" (click)="backToList()">Back</button>&nbsp;
-			<button type="submit" (click)="updateItem(id.value, name.value, owner.value, description.value, price.value, status.value)" [disabled]="updateForm.pristine || updateForm.invalid" mat-raised-button color="primary">Save</button>
+			<button type="submit" (click)="updateItem(name.value, owner.value, description.value, price.value, status.value)" [disabled]="updateForm.pristine || updateForm.invalid" mat-raised-button color="primary">Save</button>
 		</form>
 	</mat-card>
 </div>

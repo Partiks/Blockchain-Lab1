@@ -1,17 +1,10 @@
-table{
-	width:100%;
+.edit-form{
+	mind-width: 150px;
+	width: 100%;
 }
 
-.mat-column-right{
-	text-align: center;
-}
-
-.example-card {
-  max-width: 20%;
-}
-
-.white_bg{
-	background-color: white;
+.field-full-width{
+	width: 100%;
 }
 
 .example-fill-remaining-space {

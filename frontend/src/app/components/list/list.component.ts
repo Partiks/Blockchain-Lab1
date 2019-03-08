@@ -6,6 +6,7 @@ import { Item } from '../../item.model';
 import { User } from '../../user.model';
 import {ItemService} from '../../item.service';
 import {UserService} from '../../user.service';
+import {TransactionService} from '../../transaction.service'
 
 @Component({
   selector: 'app-list',
@@ -15,38 +16,29 @@ import {UserService} from '../../user.service';
 export class ListComponent implements OnInit {
 	
 	items: Item[];
-  u_items: any = {};
+  item: any={};
   user: any = {};
+  seller: any = {};
   uname: String;
-	displayedColumns = ['Name', 'Description', 'Price', 'Status','Actions'];
+	displayedColumns = ['Name', 'Description', 'Price', 'Status','Seller','Actions'];
 
-  constructor(private itemService: ItemService, private userService: UserService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private itemService: ItemService, private userService: UserService, private transactionService: TransactionService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-  console.log("List 1");
-  	this.itemService.getAllItems().subscribe( (items) => {
-  	console.log(items);
-  	});
-    console.log("List 2");
-  	this.fetchItems();
-    console.log("List 3");
+    this.itemService.getAllItems().subscribe( (items) => {
+    console.log(items);
+    });
+    this.fetchItems();
     this.route.params.subscribe( params => {
       this.uname = params.uname;
       console.log("UNAME POSSIBLE ???");
       console.log(this.uname);
       this.userService.getUserByUname(this.uname).subscribe( res => {
         this.user = res;
-        this.userService.getAllUserItems(this.uname).subscribe( res2 => {
-          this.u_items = res2;
-        });
       })
     });
-    console.log("List 4");
-
-    console.log(this.u_items);
-    console.log("List INIT END");
-
   }
+
 
   fetchItems(){
   	this.itemService
@@ -58,6 +50,50 @@ export class ListComponent implements OnInit {
   		});
   }
 
+  buyItem(id){
+  console.log("REACHED BUT_ITEM");
+    this.itemService.getItemById(id).subscribe(res => {
+      this.item = res;
+      if(this.item.status == "Sold Out" || this.item.owner == this.uname){
+        this.router.navigate([`/error/${this.uname}`]);
+        return ;
+      }
+      console.log(this.item);
+      console.log(this.user);
+      console.log(this.item.price);
+      console.log(this.user.balance);
+      if(this.item.price < this.user.balance){
+      console.log("STEP 2");
+        this.userService.getUserByUname(this.item.owner).subscribe( (res)=>{
+          console.log("STEP 3");
+          this.seller = res;
+          this.user.balance = parseInt(this.user.balance) - parseInt(this.item.price);
+          console.log(this.user.balance);
+          this.seller.balance = parseInt(this.seller.balance) + parseInt(this.item.price);
+          console.log(this.seller.balance);
+          console.log(this.user.username);
+          console.log(this.seller.username);
+          this.userService.updateUser(this.uname, this.user.password, this.user.balance).subscribe(() => {
+          });
+          this.userService.updateUser(this.seller.username, this.seller.password, this.seller.balance).subscribe(() => {
+          });
+          this.transactionService.addTransaction(this.seller.username, this.user.username, this.item._id, this.item.name, this.item.price).subscribe(() => {});
+          this.itemService.updateItem(id, this.item.name, this.uname, this.item.description, this.item.price, "Sold Out").subscribe(() => {
+            this.fetchItems();
+          });
+        });
+        console.log("STEP 4");
+        console.log("STEP 5");
+
+      }
+      else{
+        this.router.navigate([`/error/${this.uname}`]);
+        console.log("INSUFFICIENT FUNDS");
+        //throw insufficient funds error here
+      }
+    });
+  }
+
   editItem(id) {
   	this.router.navigate([`/edit/${this.uname}/${id}`]);
   }
@@ -66,10 +102,32 @@ export class ListComponent implements OnInit {
     this.router.navigate([`/create/${this.uname}`]);
   }
 
-  deleteItem(id) {
-  	this.itemService.deleteItem(id).subscribe( () =>{
-  		this.fetchItems();
-  	});
+  deposit(){
+    this.router.navigate([`/deposit/${this.uname}`]);
   }
+
+  deleteItem(id) {
+    this.itemService.getItemById(id).subscribe(res => {
+        this.item = res;
+        if(this.item.owner == this.uname){
+          this.itemService.deleteItem(id).subscribe( () =>{
+            this.fetchItems();
+          });
+        }
+        else{
+          this.router.navigate([`/error/${this.uname}`]);
+        }
+    });
+  }
+
+  showTransactions(){
+    this.router.navigate([`/transaction/${this.uname}`]);
+  }
+
+  logOut(){
+    console.log("LOGOUT");
+    this.router.navigate([`/login`]);
+  }
+
 
 }

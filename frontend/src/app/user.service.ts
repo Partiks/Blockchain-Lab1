@@ -23,6 +23,25 @@ export class UserService{
   		return this.http.get(`${this.uri}/users/${uname}/items`);
   	}
 
+  	addUser(uname, password, balance){
+  		const user={
+  			username: uname,
+  			password: password,
+  			balance: balance
+  		};
+  		return this.http.post(`${this.uri}/users/add`, user);
+  	}
+
+	updateUser(uname, password, balance){
+		console.log("REACHED USER UPDATE SERVICE");
+	  	const user = {
+		  	username: uname,
+		  	password: password,
+		  	balance: balance,
+	  	};
+	  	console.log("USER UPDATE_SERVICES ----");
+	  	return this.http.post(`${this.uri}/users/update/${uname}`, user);
+  	}
 
 
 }

@@ -1,5 +1,4 @@
 export interface Item{
-	id: Number;
 	name: String;
 	description: String;
 	owner: String;

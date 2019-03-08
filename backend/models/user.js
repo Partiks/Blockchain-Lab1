@@ -9,9 +9,6 @@ let User = new Schema({
 	password:{
 		type: String
 	},
-	u_items:{
-		type: Array
-	},
 	balance:{
 		type: Number
 	}

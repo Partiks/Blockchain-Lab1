@@ -15,18 +15,23 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import {ItemService} from './item.service';
 import { LoginComponent } from './components/login/login.component';
+import { ErrorComponent } from './components/error/error.component';
+import { DepositComponent } from './components/deposit/deposit.component';
+import { TransactionComponent } from './components/transaction/transaction.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 const routes: Routes = [
-  { path: 'create', component: CreateComponent },
   { path: 'create/:uname', component: CreateComponent },
-  { path: 'edit/:id', component: EditComponent },
   { path: 'edit/:uname/:id', component: EditComponent },
-  { path: 'list', component: ListComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'list/:uname/items', component: ListComponent },
   { path: 'list/:uname', component: ListComponent },
-  { path: '', redirectTo: '/list', pathMatch: 'full'}
+  { path: 'error/:uname', component: ErrorComponent },
+  { path: 'deposit/:uname', component: DepositComponent },
+  { path: 'transaction/:uname', component: TransactionComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 
 @NgModule({
@@ -36,6 +41,10 @@ const routes: Routes = [
     CreateComponent,
     EditComponent,
     LoginComponent,
+    ErrorComponent,
+    DepositComponent,
+    TransactionComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

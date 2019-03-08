@@ -20,9 +20,8 @@ export class ItemService {
   	return this.http.get(`${this.uri}/items/${id}`);
   }
 
-  addItem(id, name, owner, description, price){
+  addItem(name, owner, description, price){
   	const item = {
-  	id : id,
   	name: name,
   	owner: owner,
   	description: description,
@@ -32,9 +31,8 @@ export class ItemService {
   	return this.http.post(`${this.uri}/items/add`, item);
   }
 
-  updateItem(id, p_id, p_name, p_owner, p_description, p_price, p_status){
+  updateItem(id, p_name, p_owner, p_description, p_price, p_status){
   	const item = {
-  	id : p_id,
   	name: p_name,
   	owner: p_owner,
   	description: p_description,
@@ -43,7 +41,8 @@ export class ItemService {
   	};
   	console.log("ITEMS_SERVICES ----");
   	console.log(item);
-  	//console.log(`${id}`);
+  	console.log(`${id}`);
+    console.log(`${this.uri}/items/update/${id}`);
   	return this.http.post(`${this.uri}/items/update/${id}`, item);
   }
 
