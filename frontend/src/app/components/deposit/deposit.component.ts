@@ -41,9 +41,14 @@ export class DepositComponent implements OnInit {
 	  	this.userService.getUserByUname(this.uname).subscribe( (res) => {
 	  		this.user = res;
 	  			this.user.balance = parseInt(this.user.balance) + amt;
-	  			this.userService.updateUser(this.user.username, this.user.password, this.user.balance).subscribe(() => { });
+	  			this.userService.updateUser(this.user.username, this.user.password, this.user.balance).subscribe(() => {
+	  				console.log("user updated from deposit.ts");
+	  				this.backToList(); 
+	  				console.log("user updated from deposit.ts");
+	  			});
 
 	  	})
+
 	}
    }
 

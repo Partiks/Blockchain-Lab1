@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
 
 	loginForm: FormGroup;
 	user: any = {};
-
   constructor(private userService: UserService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) { 
   	this.createForm();
   }
@@ -30,8 +29,8 @@ export class LoginComponent implements OnInit {
   }
 
   login(uname, passwd){
-  console.log(uname);
-  console.log(passwd);
+    console.log(uname);
+    console.log(passwd);
   	this.userService.getUserByUname(uname).subscribe( (res) => {
   		this.user = res;
   		if(uname == this.user.username && passwd == this.user.password){
@@ -41,13 +40,8 @@ export class LoginComponent implements OnInit {
   			console.log(" >>>> LOGIN FAILED >>>>");
   			console.log(this.user);
   		}
-  	})
+  	});
   }
-
-  registerUser(){
-    this.router.navigate([`/register`]);
-  }
-
 
 
 

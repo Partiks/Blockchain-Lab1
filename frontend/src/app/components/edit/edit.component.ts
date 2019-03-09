@@ -66,6 +66,7 @@ export class EditComponent implements OnInit {
   		this.snackBar.open('Item Updated sucessfully!','OK', {
   			duration: 3000
   		});
+      this.backToList();
   	});
   }
 

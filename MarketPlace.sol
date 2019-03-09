@@ -1,5 +1,5 @@
 pragma solidity >=0.4.0 <0.6.0;
-//more useful references
+//References
 //https://solidity.readthedocs.io/en/v0.5.3/introduction-to-smart-contracts.html
 //https://medium.com/coinmonks/ethereum-land-marketplace-dapp-tutorial-part-1-create-and-deploy-a-smart-contract-351bc0d62be2
 //https://cse.buffalo.edu/~bina/cse426/spring2019/Lectures/Ballot.sol

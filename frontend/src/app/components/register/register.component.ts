@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
   		return ;
   	}
   	this.userService.addUser(uname, password, balance). subscribe( () => {
-  		this.router.navigate([`/login`]);
+  		this.router.navigate([`/list/superuser`]);
   	});
   }
 

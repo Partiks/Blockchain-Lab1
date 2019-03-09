@@ -25,10 +25,11 @@ const routes: Routes = [
   { path: 'create/:uname', component: CreateComponent },
   { path: 'edit/:uname/:id', component: EditComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'register/superuser', component: RegisterComponent },
   { path: 'list/:uname/items', component: ListComponent },
   { path: 'list/:uname', component: ListComponent },
   { path: 'error/:uname', component: ErrorComponent },
+  { path: 'error/superuser', component: ErrorComponent },
   { path: 'deposit/:uname', component: DepositComponent },
   { path: 'transaction/:uname', component: TransactionComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full'}

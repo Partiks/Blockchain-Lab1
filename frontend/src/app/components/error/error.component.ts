@@ -31,7 +31,7 @@ export class ErrorComponent implements OnInit {
       this.router.navigate([`/list/${this.uname}`]);
     }
     else{
-      this.router.navigate([`/login`]);
+      this.router.navigate([`/list/superuser`]);
     }
   }
 

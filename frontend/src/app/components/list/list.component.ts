@@ -20,6 +20,7 @@ export class ListComponent implements OnInit {
   user: any = {};
   seller: any = {};
   uname: String;
+  super: boolean = false;
 	displayedColumns = ['Name', 'Description', 'Price', 'Status','Seller','Actions'];
 
   constructor(private itemService: ItemService, private userService: UserService, private transactionService: TransactionService, private router: Router, private route: ActivatedRoute) { }
@@ -31,6 +32,9 @@ export class ListComponent implements OnInit {
     this.fetchItems();
     this.route.params.subscribe( params => {
       this.uname = params.uname;
+      if(this.uname == "superuser"){
+        this.super = true;
+      }
       console.log("UNAME POSSIBLE ???");
       console.log(this.uname);
       this.userService.getUserByUname(this.uname).subscribe( res => {
@@ -118,6 +122,10 @@ export class ListComponent implements OnInit {
           this.router.navigate([`/error/${this.uname}`]);
         }
     });
+  }
+
+  registerUser(){
+    this.router.navigate([`/register/superuser`]);
   }
 
   showTransactions(){
